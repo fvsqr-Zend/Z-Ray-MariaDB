@@ -3,13 +3,11 @@ namespace MariaDB;
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'MariaDB.php';
 
-$zre = new \ZRayExtension('MariaDB');
+$zre = new \ZRayExtension('MariaDB', true);
 $zrayMariaDB = new MariaDB();
 $zre->setMetadata(array(
     'logo' => __DIR__ . DIRECTORY_SEPARATOR . 'mariadb-logo.png'
 ));
-
-$zre->setEnabledAfter('Mage_Core_Model_App::run');
 
 $zre->traceFunction(
     'PDO::__construct', 
