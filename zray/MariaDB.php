@@ -10,13 +10,13 @@ class MariaDB
     {
         $conn = new \PDO($dsn, $username, $password, $options);
         $res = $conn->query('SHOW VARIABLES LIKE "version"');
-		if(!$res){ return; }
-		$row = $res->fetch(\PDO::FETCH_NUM);
-		if (strpos($row[1], 'MariaDB') !== false) {
-			$conn->exec('SET GLOBAL userstat=1');
-			$this->dbName = $conn->query('SELECT DATABASE()')->fetchColumn();
-			$this->conn = $conn;
-		}
+	if(!$res){ return; }
+	$row = $res->fetch(\PDO::FETCH_NUM);
+	if (strpos($row[1], 'MariaDB') !== false) {
+		$conn->exec('SET GLOBAL userstat=1');
+		$this->dbName = $conn->query('SELECT DATABASE()')->fetchColumn();
+		$this->conn = $conn;
+	}
     }
 
     public function statistics($context, &$storage)
@@ -24,7 +24,7 @@ class MariaDB
         if (!$this->conn) { 
             return;
         }
-		$sql = "SELECT CLIENT as Client, TOTAL_CONNECTIONS as 'Total Connections', CONCURRENT_CONNECTIONS as 'Concurrent Connections', CONNECTED_TIME as 'Connected Time', BUSY_TIME as 'Busy Time', CPU_TIME as 'CPU Time', BYTES_RECEIVED as 'Bytes Received', BYTES_SENT as 'Bytes Sent', BINLOG_BYTES_WRITTEN as 'Binlog Bytes Written', ROWS_READ as 'Rows Read', ROWS_SENT as 'Rows Sent', ROWS_DELETED as 'Rows deleted', ROWS_INSERTED as 'Rows Inserted', ROWS_UPDATED as 'Rows updated', SELECT_COMMANDS as 'Select Commands', UPDATE_COMMANDS as 'Update Commands', OTHER_COMMANDS as 'Other Commands' FROM INFORMATION_SCHEMA.CLIENT_STATISTICS";
+	$sql = "SELECT CLIENT as Client, TOTAL_CONNECTIONS as 'Total Connections', CONCURRENT_CONNECTIONS as 'Concurrent Connections', CONNECTED_TIME as 'Connected Time', BUSY_TIME as 'Busy Time', CPU_TIME as 'CPU Time', BYTES_RECEIVED as 'Bytes Received', BYTES_SENT as 'Bytes Sent', BINLOG_BYTES_WRITTEN as 'Binlog Bytes Written', ROWS_READ as 'Rows Read', ROWS_SENT as 'Rows Sent', ROWS_DELETED as 'Rows deleted', ROWS_INSERTED as 'Rows Inserted', ROWS_UPDATED as 'Rows updated', SELECT_COMMANDS as 'Select Commands', UPDATE_COMMANDS as 'Update Commands', OTHER_COMMANDS as 'Other Commands' FROM INFORMATION_SCHEMA.CLIENT_STATISTICS";
         foreach ($this->conn->query($sql, \PDO::FETCH_ASSOC) as $row) {
             $client = $row['Client'];
             unset($row['Client']);
