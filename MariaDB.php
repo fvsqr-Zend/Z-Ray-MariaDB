@@ -21,7 +21,6 @@ class MariaDB
     public function statistics($context, &$storage)
     {
         if (!$this->conn) { 
-            echo 'NO CONNECTION';
             return;
         }
 	$sql = "SELECT CLIENT as Client, TOTAL_CONNECTIONS as 'Total Connections', CONCURRENT_CONNECTIONS as 'Concurrent Connections', CONNECTED_TIME as 'Connected Time', BUSY_TIME as 'Busy Time', CPU_TIME as 'CPU Time', BYTES_RECEIVED as 'Bytes Received', BYTES_SENT as 'Bytes Sent', BINLOG_BYTES_WRITTEN as 'Binlog Bytes Written', ROWS_READ as 'Rows Read', ROWS_SENT as 'Rows Sent', ROWS_DELETED as 'Rows deleted', ROWS_INSERTED as 'Rows Inserted', ROWS_UPDATED as 'Rows updated', SELECT_COMMANDS as 'Select Commands', UPDATE_COMMANDS as 'Update Commands', OTHER_COMMANDS as 'Other Commands' FROM INFORMATION_SCHEMA.CLIENT_STATISTICS";
