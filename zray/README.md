@@ -15,17 +15,6 @@ Statistics on index usage, e.g. locate unused indexes.
 ### Table Statistics
 Statistics on table usage.
 
-Installation
-------------
-
-Copy the files of the repository to the following location:
-
-Example: (assuming default install directory for Zend Server)
-
-* Linux: `/usr/local/zend/var/zray/extensions/MariaDB` 
-
-* Windows: `C:\Program Files (x86)\Zend\ZendServer\data\zray\extensions\MariaDB`
-
 More Info
 ------------
 
