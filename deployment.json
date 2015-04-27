@@ -2,5 +2,5 @@
   "name" : "mariadb",
   "version" : "1.0.0",
   "type": ["zray"],
-  "logo": "zray/logo.png"
+  "logo": "zray/mariadb-logo.png"
 }
