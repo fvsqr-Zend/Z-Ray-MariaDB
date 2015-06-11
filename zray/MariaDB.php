@@ -10,12 +10,13 @@ class MariaDB
     {
         $conn = new \PDO($dsn, $username, $password, $options);
         $res = $conn->query('SHOW VARIABLES LIKE "version"');
+	if(!$res){ return; }
 	$row = $res->fetch(\PDO::FETCH_NUM);
-        if (strpos($row[1], 'MariaDB') !== false) {
-            $conn->exec('SET GLOBAL userstat=1');
-            $this->dbName = $conn->query('SELECT DATABASE()')->fetchColumn();
-            $this->conn = $conn;
-        }
+	if (strpos($row[1], 'MariaDB') !== false) {
+		$conn->exec('SET GLOBAL userstat=1');
+		$this->dbName = $conn->query('SELECT DATABASE()')->fetchColumn();
+		$this->conn = $conn;
+	}
     }
 
     public function statistics($context, &$storage)
